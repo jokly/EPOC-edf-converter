@@ -12,6 +12,11 @@ function convert_epoc_mat(folder, root_output_folder, convert_mode)
             end
         else
             load(path_to_file);
+            
+            if exist('ans1', 'var')
+               val = ans1; 
+            end
+            
             disp(path_to_file);
 
             if length(val) < count_samples
@@ -57,14 +62,14 @@ function [Ans, bool_res] = fft_convert(val, row_len)
             end
         end
         
-        arr = arr(1, :);
-        arr = sort(arr, 'descend');
         if length(arr) < row_len
             bool_res = false;
             continue;
         end
-
+        
+        arr = sort(arr, 'descend');
         arr = arr(1 : row_len);
+
         for i = 1 : row_len
            arr(i) = abs(arr(i)) * cos(angle(arr(i)));
         end
