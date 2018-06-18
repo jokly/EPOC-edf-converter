@@ -22,7 +22,7 @@ function convert_epoc_mat(folder, root_output_folder, convert_mode)
             if strcmp(convert_mode, 'fft')
                 [val, bool_res] = fft_convert(val, 15);
             elseif strcmp(convert_mode, 'max')
-                [val, bool_res] = fft_convert(val, 15);
+                [val, bool_res] = max_convert(val, 15);
             else
                 [val, bool_res] = raw_convert(val);
             end
@@ -77,7 +77,7 @@ function [Ans, bool_res] = max_convert(val, row_len)
     bool_res = true;
     Ans = [];
 
-    for j = 1 : length(val)
+    for j = 1 : size(val, 1)
         a = sort(val(j, :), 'descend');
         Ans(end + 1, :) = a(1 : row_len);
     end
